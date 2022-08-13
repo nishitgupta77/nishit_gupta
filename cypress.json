@@ -1,3 +1,7 @@
 {
-    "testFiles": "**/*.feature"
+  "ignoreTestFiles": "*.ts",
+  "env": {
+    "baseUrl": "https://www.wikipedia.org/",
+    "searchUrl": "https://en.wikipedia.org/wiki/Special:Search?search=&go=Go"
+  }
 }

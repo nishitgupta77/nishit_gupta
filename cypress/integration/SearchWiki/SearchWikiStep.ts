@@ -1,20 +1,32 @@
 /// <reference types='cypress' />
+import { HomePage } from "../../pageObject/home.page"
 import { Given, When, Then, And} from 'cypress-cucumber-preprocessor/steps';
 
+const homepage = new HomePage();
+let text: string;
+let path: string;
+
+before(() => {
+    cy.fixture('example').then(function(data) {
+         text = data.searchText
+         path = data.path
+    })
+})
+
 Given(/I navigate to Wikipedia page/,() => {
-    cy.visit('https://www.wikipedia.org/');
+    homepage.navigateToWiki()
+    homepage.verifyWikiLogoIsVisible()
 })
 
 When(/I search for Apollo 11 on search bar/,() => {
-    cy.get('#searchInput').type('Apollo')
+    homepage.inputSearchField(text)
 })
 
 And(/I click on search icon/,() => {
-    cy.get('.pure-button').click();
+    homepage.clickSearchButton();
 })
 
 Then(/I should see wiki page for Apollo 11/,() => {
-    cy.url().should('be.equal','https://en.wikipedia.org/wiki/Apollo')
-
+    homepage.verifyCorrectPageOpened(path)
 })
 
