@@ -119,8 +119,8 @@ https://monefy.me/
 
 # TASK 2 - Software Release
 
-1.  Risk analysis based on new changes done should be used to determine
-    what areas to be focused on while testing the application.
+1.  Risk analysis based on new changes should be done to determine
+    the areas to be focused on while testing the application.
 
 2.  Create a list that should prioritize on the following:
 
@@ -182,3 +182,86 @@ https://monefy.me/
 
 3. head -20 dpkg.log
 
+
+# TASK 4 - Automated testing 
+
+Web automation has been implemented as an automation task to verify the search functionality of the WikiSearch using Cypress, Cucumber and Typescript.
+Automation has been implemented using the BDD approach and below are the steps that would be executed using Gherkin language:
+
+Feature: Wikipedia search functionality</br>
+As a user </br>
+I should be able to search </br>
+using Wikipedia search</br>
+
+Scenario: Verify search on Wikipedia page </br>
+Given I navigate to Wikipedia page</br>
+When I search for Apollo 11 on search bar</br>
+And I click on search icon</br> 
+Then I should see wiki page for Apollo 11</br>
+
+Scenario: Verify special search on Wikipedia page</br>
+Given I navigate to Wikipedia special search page</br>
+When I search for Apollo 11 on search page</br>
+And I click on search button And I click on Apollo 11 page link </br>
+Then I should see wiki page for Apollo 11</br>
+
+
+Outline of automating proposed scenarios on different levels of testing pyramid.
+The testing pyramid is a concept that group software into three categories. This helps QA professionals to ensure quality, reduce the time it takes to find root cause of bug, and build more reliable suite.
+
+From top to bottom, the main layer include:
+1.	UI/Exploratory tests
+2.	Integration tests
+3.	Unit tests
+
+
+UI/ Exploratory tests generally lie at the top layer of the pyramid which are generally are more complex and have more dependencies than unit and integrations tests. Our automation suite has been implemented based on the top layer of the pyramid. Following are the pros and cons list:
+Pros: 
+1.	Tests from user perspective.
+2.	Verifies end to end workflow of the application.
+3.	Reduces number of errors found in production.
+
+
+Cons:
+1.	Slow execution time as it performs end to end test on workflows.
+2.	Test flakiness as it requires maintenance and trouble shooting if change in workflows.
+
+Technical Document:
+
+Tech Stack, Libraries and Dependencies used:
+1. Cypress
+2. TypeScript
+3. Cucumber
+4. Visual studio code
+5. Nodejs
+6. CircleCi
+
+**Project Specification:**
+
+Cypress has been used for automation as it is widely used open-source end-to-end framework used to automate web application.
+
+Page Object Model design pattern approach has been used for storing objects and maintaining test in separate folder. It is useful in reducing code duplication and improves test case maintenance.
+
+Behaviour Driven Development (BDD) approach has been used to implement the framework that allows expected software behaviors to be specified in a logical language that all stake holders can understand.
+
+<h3>(BONUS)</h3>
+CircleCi has been used to run testcases in the continuous integrated platform.CircleCI is a lightweight cloud-based continuous integration and delivery platform that automates build, test and deployment processes.
+
+
+**Folder structure:** 
+
+cypress/package.json: it is the heart of any node project and contains all the dependencies required for the initial setup.
+
+cypress/integration/SearchWiki.feature: contains the feature and the steps required to automate the scenario to test search functionality on wiki. This is implemented using Cucumber and the language used is gherkin supporting BDD approach that is easily understandable to stakeholders.
+
+cypress/integration/SearchWiki : contains all the stepDefinition files specific to the feature and scenarios mentioned in the above feature file.
+
+cypress/pageObjects: contains all the page objects (page locators) and methods specific to that page.
+
+cypress.json: have all the configuration that is required for the cypress like baseURl
+ 
+HOW TO USE:
+
+1. git clone the repo https://github.com/nishitgupta77/nishit_gupta.git
+2. open the terminal and run command: npm install
+3. npm run test
